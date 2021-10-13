@@ -1,3 +1,5 @@
+from pygame.locals import *
+
 from gui import Button
 
 
@@ -16,7 +18,7 @@ class GameState:
         pass
 
 
-class MenuState(GameState):
+class MenuGameState(GameState):
 
     def __init__(self, engine):
         GameState.__init__(self, engine)
@@ -26,7 +28,9 @@ class MenuState(GameState):
         self.exit_button.set_on_click_function(self.engine.stop)
 
     def handle_event(self, event):
-        pass
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                self.engine.stop()
 
     def update(self, frame_time_s):
         self.start_button.update()
